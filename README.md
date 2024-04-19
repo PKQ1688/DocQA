@@ -1,1 +1,5 @@
 # DocQA
+
+# install
+
+poppler

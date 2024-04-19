@@ -1,0 +1,9 @@
+unstructured[all-docs]
+xata
+python-dotenv
+pinecone-client
+tiktoken
+tenacity
+pinecone-client
+beautifulsoup4
+requests
