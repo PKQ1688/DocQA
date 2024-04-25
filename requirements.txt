@@ -7,3 +7,17 @@ tenacity
 pinecone-client
 beautifulsoup4
 requests
+langchain
+langchain-pinecone
+fastapi
+uvicorn[standard]
+transformers
+trl
+peft
+accelerate
+datasets
+bitsandbytes
+scipy
+sentencepiece
+gradio
+protobuf

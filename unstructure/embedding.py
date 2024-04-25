@@ -8,7 +8,6 @@
 import logging
 import os
 import pickle
-from datetime import UTC, datetime
 
 import tiktoken
 from bs4 import BeautifulSoup
@@ -18,7 +17,7 @@ from pinecone import Pinecone
 from tenacity import retry, stop_after_attempt, wait_fixed
 from xata import XataClient
 
-from LLM.minimax import get_embeddings
+from LLM.API.minimax import get_embeddings
 
 load_dotenv()
 
