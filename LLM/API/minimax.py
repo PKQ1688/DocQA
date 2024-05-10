@@ -38,6 +38,7 @@ def get_embeddings(text_list, model="embo-01"):
 
     except Exception as e:
         print(e)
+        return []
 
 
 if __name__ == "__main__":

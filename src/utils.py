@@ -13,7 +13,8 @@ from langchain.chains import LLMChain
 from langchain.prompts import (
     PromptTemplate,
 )
-from langchain_community.chat_models import MiniMaxChat
+# from langchain_community.chat_models import MiniMaxChat
+from langchain_community.chat_models import ChatTongyi
 from langchain_community.embeddings import MiniMaxEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from xata.client import XataClient
@@ -26,6 +27,7 @@ pinecone_serverless_api = os.getenv("PINECONE_SERVERLESS_API_KEY")
 pinecone_serverless_index_name = os.getenv("PINECONE_SERVERLESS_INDEX_NAME")
 minimax_group_id = os.getenv("MINIMAX_GROUP_ID")
 minimax_api_key = os.getenv("MINIMAX_API_KEY")
+dashscope_api_key = os.getenv("DASHSCOPE_API_KEY")
 
 langchain_verbose = True
 
@@ -76,7 +78,7 @@ def search_pinecone(query: str, filters: dict = {}, top_k: int = 16):
     )
 
     if filters:
-        print("use filters")
+        print(filters)
         docs = vectorstore.similarity_search(query, k=top_k, filter=filters)
     else:
         print("no filters")
@@ -164,10 +166,17 @@ def main_chain():
     #     verbose=langchain_verbose,
     # )
 
-    llm_chat = MiniMaxChat(
-        MINIMAX_GROUP_ID=minimax_group_id,
-        MINIMAX_API_KEY=minimax_api_key,
-        model_name="abab5-chat",
+    # llm_chat = MiniMaxChat(
+    #     MINIMAX_GROUP_ID=minimax_group_id,
+    #     MINIMAX_API_KEY=minimax_api_key,
+    #     model_name="abab5-chat",
+    #     temperature=0.01,
+    #     streaming=True,
+    # )
+
+    llm_chat = ChatTongyi(
+        model_name="qwen-max",
+        dashscope_api_key=dashscope_api_key,
         temperature=0.01,
         streaming=True,
     )
@@ -186,3 +195,10 @@ def main_chain():
     )
 
     return chain
+
+
+if __name__ == '__main__':
+    main_chain().invoke(
+        {"input": "番茄是什么植物？"},
+        # {"callbacks": [st_callback]},
+    )
